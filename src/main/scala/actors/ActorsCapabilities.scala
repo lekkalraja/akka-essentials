@@ -63,6 +63,7 @@ object ActorsCapabilities extends App {
 
   class Counter extends Actor {
     private val counter: Int = 0
+
     override def receive: Receive = onMessage(counter)
 
     private def onMessage(counter: Int): Receive = {
