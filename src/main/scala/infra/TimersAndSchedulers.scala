@@ -1,6 +1,6 @@
-package SchedulersAndTimers
+package infra
 
-import SchedulersAndTimers.TimersAndSchedulers.TimersBasedSelfClosingActor.TimersBasedSelfClosingActorKey
+import infra.TimersAndSchedulers.TimersBasedSelfClosingActor.TimersBasedSelfClosingActorKey
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Cancellable, PoisonPill, Props, Timers}
 
 import scala.concurrent.duration.DurationInt
