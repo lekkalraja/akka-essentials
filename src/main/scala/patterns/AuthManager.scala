@@ -6,8 +6,8 @@ import akka.util.Timeout
 import patterns.AuthManager._
 import patterns.DBActor.{Read, Write}
 
-import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.concurrent.duration.DurationInt
+import scala.concurrent.{ExecutionContextExecutor, Future}
 
 object AuthManager {
   case class RegisterUser(username: String, password: String)
@@ -37,19 +37,5 @@ class AuthManager extends Actor with ActorLogging {
           else AuthFailure(AUTH_FAILURE_PASSWORD_INCORRECT)
       }
       response.pipeTo(sender())
-  }
-}
-
-
-// Assume it is a (redis, aerospike) i.e. Key-Value Database
-object DBActor {
-  case class Read(key: String)
-  case class Write(key: String, value: String)
-}
-class DBActor extends Actor {
-  override def receive: Receive = kvDB(Map())
-  def kvDB(store: Map[String, String]) : Receive = {
-    case Read(key) => sender() ! store.get(key)
-    case Write(key, value) => context.become(kvDB(store + (key -> value)))
   }
 }
